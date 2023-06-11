@@ -11,7 +11,7 @@
 | first_name         | string | null: false               |
 | last_name_kana     | string | null: false               |
 | first_name_kana    | string | null: false               |
-| date_of_birth      | string | null: false               |
+| date_of_birth      | date   | null: false               |
 
 ### Association
 
@@ -24,10 +24,10 @@
 | ------------------- | ---------- | ------------------------------ |
 | name                | string     | null: false                    |
 | description         | text       | null: false                    |
-| user_id             | references | null: false, foreign_key: true |
+| user                | references | null: false, foreign_key: true |
 | category_id         | integer    | null: false                    |
 | situation_id        | integer    | null: false                    |
-| shipping_charges_id | integer    | null: false                    |
+| shipping_charge _id | integer    | null: false                    |
 | region_of_origin_id | integer    | null: false                    |
 | ship_date_id        | integer    | null: false                    |
 | price               | integer    | null: false                    |
@@ -37,28 +37,28 @@
 * belongs_to :user
 * has_one :purchase record
 
-## shipping addresses テーブル
+## shipping_addresses テーブル
 
-| Column              | Type   | Options     |
-| ------------------- | ------ | ------------|
-| post_code           | string | null: false |
-| region_of_origin_id | string | null: false |
-| municipalities      | string | null: false |
-| address             | string | null: false |
-| building_name       | string |             |
-| telephone_number    | string | null: false |
-| purchase_record_id  | string | null: false |
+| Column              | Type    | Options     |
+| ------------------- | ------- | ------------|
+| post_code           | string  | null: false |
+| region_of_origin    | integer | null: false |
+| municipalities      | string  | null: false |
+| address             | string  | null: false |
+| building_name       | string  |             |
+| telephone_number    | string  | null: false |
+| purchase_record_id  | string  | null: false |
 
 ### Association
 
 * belongs_to :purchase record
 
-## purchase records テーブル
+## purchase_records テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| user_id  | string | null: false |
-| goods_id | string | null: false |
+| Column   | Type       | Options           |
+| -------- | ---------- | ----------------- |
+| user     | references | foreign_key: true |
+| goods    | references | foreign_key: true |
 
 ### Association
 
