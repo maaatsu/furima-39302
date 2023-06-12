@@ -55,10 +55,10 @@
 
 ## purchase_records テーブル
 
-| Column   | Type       | Options           |
-| -------- | ---------- | ----------------- |
-| user     | references | foreign_key: true |
-| good     | references | foreign_key: true |
+| Column   | Type       | Options                        |
+| -------- | ---------- | ------------------------------ |
+| user     | references | null: false, foreign_key: true |
+| good     | references | null: false, foreign_key: true |
 
 ### Association
 
