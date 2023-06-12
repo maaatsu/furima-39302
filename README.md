@@ -16,7 +16,7 @@
 ### Association
 
 * has_many :goods
-* has_many :purchase record
+* has_many :purchase_records
 
 ## goods テーブル
 
@@ -35,33 +35,33 @@
 ### Association
 
 * belongs_to :user
-* has_one :purchase record
+* has_one :purchase_record
 
 ## shipping_addresses テーブル
 
-| Column              | Type    | Options     |
-| ------------------- | ------- | ------------|
-| post_code           | string  | null: false |
-| region_of_origin    | integer | null: false |
-| municipalities      | string  | null: false |
-| address             | string  | null: false |
-| building_name       | string  |             |
-| telephone_number    | string  | null: false |
-| purchase_record_id  | string  | null: false |
+| Column              | Type       | Options                        |
+| --------------------| ---------- | ------------------------------ |
+| post_code           | string     | null: false                    |
+| region_of_origin_id | integer    | null: false                    |
+| municipalities      | string     | null: false                    |
+| address             | string     | null: false                    |
+| building_name       | string     |                                |
+| telephone_number    | string     | null: false                    |
+| purchase_record     | references | null: false, foreign_key: true |
 
 ### Association
 
-* belongs_to :purchase record
+* belongs_to :purchase_record
 
 ## purchase_records テーブル
 
 | Column   | Type       | Options           |
 | -------- | ---------- | ----------------- |
 | user     | references | foreign_key: true |
-| goods    | references | foreign_key: true |
+| good     | references | foreign_key: true |
 
 ### Association
 
 * belongs_to :user
 * belongs_to :good
-* has_one :shipping addresses
+* has_one :shipping_addresses
