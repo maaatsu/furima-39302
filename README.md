@@ -41,7 +41,7 @@
 
 | Column              | Type       | Options                        |
 | --------------------| ---------- | ------------------------------ |
-| post_code           | string     | null: false                    |
+| post_code_id        | string     | null: false                    |
 | region_of_origin_id | integer    | null: false                    |
 | municipalities      | string     | null: false                    |
 | address             | string     | null: false                    |
@@ -64,4 +64,4 @@
 
 * belongs_to :user
 * belongs_to :good
-* has_one :shipping_addresses
+* has_one :shipping_address
