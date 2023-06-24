@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Nickname can't be blank")
     end
-    
+
     it 'emailが空では登録できない' do
       @user.email = ''
       @user.valid?
@@ -57,26 +57,16 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
 
-    it 'お名前(全角)は、名字と名前がそれぞれ必須であること' do
-      @user.first_name = ''
-      @user.last_name = '山田'
-      @user.valid?
-      @user.errors.add(:first_name, 'お名前(全角)を入力してください') # エラーメッセージを追加
-      p @user.errors[:first_name] # エラーメッセージを表示
-      expect(@user.errors[:first_name]).to include('お名前(全角)を入力してください')
-    
-      @user.first_name = '太郎'
+    it 'お名前(全角)の名字が必須であること' do
       @user.last_name = ''
       @user.valid?
-      @user.errors.add(:last_name, 'お名前(全角)を入力してください') # エラーメッセージを追加
-      p @user.errors[:last_name] # エラーメッセージを表示
       expect(@user.errors[:last_name]).to include('お名前(全角)を入力してください')
+    end
     
-      @user.first_name = '太郎'
-      @user.last_name = '山田'
+    it 'お名前(全角)の名前が必須であること' do
+      @user.first_name = ''
       @user.valid?
-      expect(@user.errors[:first_name]).to be_empty
-      expect(@user.errors[:last_name]).to be_empty
+      expect(@user.errors[:first_name]).to include('お名前(全角)を入力してください')
     end
 
     it 'お名前(全角)は、全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
