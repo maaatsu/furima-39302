@@ -128,9 +128,6 @@ RSpec.describe User, type: :model do
         @user.date_of_birth = nil
         @user.valid?
         expect(@user.errors[:date_of_birth]).to include('を入力してください')
-    
-        @user.date_of_birth = Date.new(1990, 1, 1)
-        @user.valid?
       end
     end
   end
