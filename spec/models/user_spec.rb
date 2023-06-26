@@ -119,7 +119,6 @@ RSpec.describe User, type: :model do
       end
 
       it 'お名前カナ名前(全角)は、全角（カタカナ）での入力が必須であること' do      
-        @user.first_name_kana = 'タロウ'
         @user.last_name_kana = 'Yamada'
         @user.valid?
         expect(@user.errors[:last_name_kana]).to include('は全角カタカナで入力してください')
