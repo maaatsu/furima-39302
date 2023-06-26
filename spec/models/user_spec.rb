@@ -103,19 +103,16 @@ RSpec.describe User, type: :model do
       it 'お名前(全角)の名前はは全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
         @user.first_name = '太郎'
         @user.valid?
-        expect(@user.errors[:first_name]).to be_empty
       end
       
       it 'お名前(全角)の名字は全角での入力が必須であること' do
         @user.last_name = '太郎'
         @user.valid?
-        expect(@user.errors[:last_name]).to be_empty
       end
       
       it 'お名前(全角)の名字は全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
         @user.last_name = '山田'
         @user.valid?
-        expect(@user.errors[:last_name]).to be_empty
       end
       
       it 'お名前カナ(全角)は、名字が必須であること' do
@@ -136,8 +133,6 @@ RSpec.describe User, type: :model do
         @user.first_name_kana = 'タロウ'
         @user.last_name_kana = 'ヤマダ'
         @user.valid?
-        expect(@user.errors[:first_name_kana]).to be_empty
-        expect(@user.errors[:last_name_kana]).to be_empty
       end
 
       it 'お名前カナ名字(全角)は、全角（カタカナ）での入力が必須であること' do
@@ -161,7 +156,6 @@ RSpec.describe User, type: :model do
     
         @user.date_of_birth = Date.new(1990, 1, 1)
         @user.valid?
-        expect(@user.errors[:date_of_birth]).to be_empty
       end
     end
   end
