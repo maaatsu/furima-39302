@@ -15,12 +15,12 @@ class User < ApplicationRecord
   validate :password_complexity
 
   private
-  
+
   def password_complexity
     return if encrypted_password.blank?
-  
-    unless password.match?(/(?=.*[a-zA-Z])(?=.*\d)/)
-      errors.add(:password, 'は半角英数字の組み合わせで入力してください')
-    end
+
+    return if password.match?(/(?=.*[a-zA-Z])(?=.*\d)/)
+
+    errors.add(:password, 'は半角英数字の組み合わせで入力してください')
   end
 end
