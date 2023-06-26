@@ -22,7 +22,7 @@ RSpec.describe User, type: :model do
       @user.save
       another_user = FactoryBot.build(:user, email: @user.email)
       another_user.save
-      expect(another_user.errors[:email]).to include('はすでに存在します') if another_user.errors.has_key?(:email)
+      expect(another_user.errors.full_messages).to include('はすでに存在します') if another_user.errors.has_key?(:email)
     end   
 
     it 'emailは@を含まないと登録できない' do
