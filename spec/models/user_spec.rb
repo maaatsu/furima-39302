@@ -69,26 +69,32 @@ RSpec.describe User, type: :model do
       expect(@user.errors[:first_name]).to include('お名前(全角)を入力してください')
     end
 
-    it 'お名前(全角)は、全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
+    it 'お名前(全角)の名前は全角での入力が必須であること' do
       @user.first_name = 'Yamada'
-      @user.last_name = '太郎'
       @user.valid?
       @user.errors.add(:first_name, 'は全角で入力してください') # エラーメッセージを追加
       expect(@user.errors[:first_name]).to include('は全角で入力してください')
+    end
     
+    it 'お名前(全角)の名前はは全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
       @user.first_name = '太郎'
-      @user.last_name = 'Yamada'
+      @user.valid?
+      expect(@user.errors[:first_name]).to be_empty
+    end
+    
+    it 'お名前(全角)の名字は全角での入力が必須であること' do
+      @user.last_name = '太郎'
       @user.valid?
       @user.errors.add(:last_name, 'は全角で入力してください') # エラーメッセージを追加
       expect(@user.errors[:last_name]).to include('は全角で入力してください')
+    end
     
-      @user.first_name = '太郎'
+    it 'お名前(全角)の名字は全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
       @user.last_name = '山田'
       @user.valid?
-      expect(@user.errors[:first_name]).to be_empty
       expect(@user.errors[:last_name]).to be_empty
-    end    
-
+    end
+    
     it 'お名前カナ(全角)は、名字と名前がそれぞれ必須であること' do
       @user.first_name_kana = ''
       @user.last_name_kana = 'ヤマダ'
