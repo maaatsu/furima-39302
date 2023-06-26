@@ -55,6 +55,14 @@ RSpec.describe User, type: :model do
         @user.password = 'password' # 半角英字のみのパスワードを設定
         @user.valid?
         expect(@user.errors[:password]).to include('は英字と数字の両方を含めて設定してください') if @user.password =~ /^(?=.*[a-zA-Z])(?=.*[0-9]).+$/
+
+        @user.password = '123456' # 数字のみのパスワードを設定
+        @user.valid?
+        expect(@user.errors[:password]).to include('は英字と数字の両方を含めて設定してください') if @user.password =~ /^(?=.*[a-zA-Z])(?=.*[0-9]).+$/
+
+        @user.password = 'パスワード' # 全角文字のみのパスワードを設定
+        @user.valid?
+        expect(@user.errors[:password]).to include('は英字と数字の両方を含めて設定してください') if @user.password =~ /^(?=.*[a-zA-Z])(?=.*[0-9]).+$/
       end   
 
       it 'passwordとpassword_confirmationが不一致では登録できない' do
