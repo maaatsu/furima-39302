@@ -72,8 +72,7 @@ RSpec.describe User, type: :model do
     it 'お名前(全角)の名前は全角での入力が必須であること' do
       @user.first_name = 'Yamada'
       @user.valid?
-      @user.errors.add(:first_name, 'は全角で入力してください') # エラーメッセージを追加
-      expect(@user.errors[:first_name]).to include('は全角で入力してください')
+      expect(@user.errors[:first_name]).to include('は全角ひらがな、カタカナ、漢字で入力してください')
     end
     
     it 'お名前(全角)の名前はは全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
@@ -85,8 +84,7 @@ RSpec.describe User, type: :model do
     it 'お名前(全角)の名字は全角での入力が必須であること' do
       @user.last_name = '太郎'
       @user.valid?
-      @user.errors.add(:last_name, 'は全角で入力してください') # エラーメッセージを追加
-      expect(@user.errors[:last_name]).to include('は全角で入力してください')
+      expect(@user.errors[:last_name]).to be_empty
     end
     
     it 'お名前(全角)の名字は全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
@@ -99,14 +97,12 @@ RSpec.describe User, type: :model do
       @user.first_name_kana = ''
       @user.last_name_kana = 'ヤマダ'
       @user.valid?
-      @user.errors.add(:first_name_kana, 'を入力してください') # エラーメッセージを追加
-      expect(@user.errors[:first_name_kana]).to include('を入力してください')
+      expect(@user.errors[:first_name_kana]).to include('は全角カタカナで入力してください')
     
       @user.first_name_kana = 'タロウ'
       @user.last_name_kana = ''
       @user.valid?
-      @user.errors.add(:last_name_kana, 'を入力してください') # エラーメッセージを追加
-      expect(@user.errors[:last_name_kana]).to include('を入力してください')
+      expect(@user.errors[:last_name_kana]).to include('は全角カタカナで入力してください')
     
       @user.first_name_kana = 'タロウ'
       @user.last_name_kana = 'ヤマダ'
@@ -119,13 +115,11 @@ RSpec.describe User, type: :model do
       @user.first_name_kana = 'Yamada'
       @user.last_name_kana = 'タロウ'
       @user.valid?
-      @user.errors.add(:first_name_kana, 'は全角カタカナで入力してください') # エラーメッセージを追加
       expect(@user.errors[:first_name_kana]).to include('は全角カタカナで入力してください')
     
       @user.first_name_kana = 'タロウ'
       @user.last_name_kana = 'Yamada'
       @user.valid?
-      @user.errors.add(:last_name_kana, 'は全角カタカナで入力してください') # エラーメッセージを追加
       expect(@user.errors[:last_name_kana]).to include('は全角カタカナで入力してください')
     
       @user.first_name_kana = 'タロウ'
