@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  validates :encrypted_password, presence: true, length: { minimum: 6 }
+  validates :password, format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]+\z/, message: 'は半角英数字混合で入力してください' }
   validates :last_name, presence: { message: 'お名前(全角)を入力してください' }
   validates :first_name, presence: { message: 'お名前(全角)を入力してください' }  
   validates :last_name_kana, presence: true, format: { with: /\A[ァ-ンー－]+\z/, message: 'は全角カタカナで入力してください' }
