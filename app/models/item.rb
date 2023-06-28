@@ -7,5 +7,6 @@ class Item < ApplicationRecord
   validates :shipping_charge_id, presence: true
   validates :region_of_origin_id, presence: true
   validates :ship_date_id, presence: true
+  validates :price, presence: true
   
 end
