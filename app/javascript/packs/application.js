@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   priceInput.addEventListener("input", () => {
     const price = parseInt(priceInput.value, 10);
     const tax = Math.floor(price * 0.1);
-    const profitAmount = price - tax;
+    const profitAmount = Math.floor(price - tax);
 
     if (isNaN(price)) {
       addTaxPrice.textContent = "0";
