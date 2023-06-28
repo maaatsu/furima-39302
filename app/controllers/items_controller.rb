@@ -21,6 +21,13 @@ class ItemsController < ApplicationController
       ["ハンドメイド", 9],
       ["その他", 10]
     ]
+
+    @shipping_fee_options = [
+      ["---", "未選択"],
+      ["着払い(購入者負担)", "着払い"],
+      ["送料込み(出品者負担)", "送料込み"]
+    ]
+    
   end
-  
+
 end
