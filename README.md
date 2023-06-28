@@ -27,7 +27,7 @@
 | user                | references | null: false, foreign_key: true |
 | category_id         | integer    | null: false                    |
 | situation_id        | integer    | null: false                    |
-| shipping_charge _id | integer    | null: false                    |
+| shipping_charge_id  | integer    | null: false                    |
 | region_of_origin_id | integer    | null: false                    |
 | ship_date_id        | integer    | null: false                    |
 | price               | integer    | null: false                    |
