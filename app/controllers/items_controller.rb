@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :authenticate_user!, only: [:new]
-  before_action :set_categories, only: [:new, :create]
+  before_action :set_categories, only: [:new, :create, :edit, :update]
   
   def index
     render 'items/index'
@@ -86,7 +86,8 @@ class ItemsController < ApplicationController
     
     if @item.save
       respond_to do |format|
-      format.js { }
+        format.html { redirect_to root_path, notice: '商品が出品されました。' }
+        format.js
       # redirect_to @item, notice: '商品が出品されました。'
       end
     else
