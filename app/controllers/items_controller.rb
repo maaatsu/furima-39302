@@ -87,8 +87,7 @@ class ItemsController < ApplicationController
     if @item.save
       respond_to do |format|
         format.html { redirect_to root_path, notice: '商品が出品されました。' }
-        format.js
-      # redirect_to @item, notice: '商品が出品されました。'
+        format.js  { render js: "window.location.replace('#{root_path}');" }
       end
     else
       @categories = Category.all
@@ -145,7 +144,7 @@ class ItemsController < ApplicationController
       ]
     respond_to do |format|
       format.html { render :new }
-      format.js
+      format.js { render :create_error }
     end
     end
   end
