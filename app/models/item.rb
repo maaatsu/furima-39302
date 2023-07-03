@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   validates :shipping_fee_status, presence: true
   validates :prefecture,          presence: true
   validates :scheduled_delivery,  presence: true
-  validates :price,               presence: true
+  validates :price,               presence: true, numericality: { only_integer: true }
 
   enum shipping_fee_status: { 着払い: 0, 送料込み: 1 }
 end
