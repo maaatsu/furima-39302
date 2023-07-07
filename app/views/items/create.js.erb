@@ -1,7 +1,0 @@
-window.location.replace("<%= root_path %>");
-
-<% if @item.errors.any? %>
-  <% @item.errors.full_messages.each do |message| %>
-    toastr.error("<%= message %>");
-  <% end %>
-<% end %>

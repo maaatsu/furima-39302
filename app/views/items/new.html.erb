@@ -5,7 +5,7 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item do |f| %>
+    <%= form_with model: @item, local: true do |f| %>
 
     <%= render 'shared/error_messages', model: @item %>
 
@@ -29,7 +29,7 @@
         商品名
         <span class="indispensable">必須</span>
       </div>
-      <%= f.text_area :name, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
+      <%= f.text_area :name, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで）", maxlength:"40" %>
       <div class="items-explain">
         <div class="weight-bold-text">
           商品の説明
@@ -69,13 +69,13 @@
           配送料の負担
           <span class="indispensable">必須</span>
         </div>
-          <%= f.collection_select(:shipping_fee_status, @shipping_fee_options, :last, :first, { prompt: "選択してください" }, { class: "select-box", id: "item-shipping-fee-status" }) %>
+          <%= f.collection_select(:shipping_fee_status, @shipping_fee_status, :last, :first, { prompt: "選択してください" }, { class: "select-box", id: "item-shipping-fee-status" }) %>
         <div class="weight-bold-text">
           発送元の地域
           <span class="indispensable">必須</span>
         </div>
 
-          <%= f.collection_select(:prefecture, @prefecture_options, :first, :last, { prompt: "選択してください" }, { class: "select-box", id: "item-prefecture" }) %>
+          <%= f.collection_select(:prefecture, @prefecture, :first, :last, { prompt: "選択してください" }, { class: "select-box", id: "item-prefecture" }) %>
 
         <div class="weight-bold-text">
           発送までの日数

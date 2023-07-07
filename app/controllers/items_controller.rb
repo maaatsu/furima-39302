@@ -9,27 +9,13 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    @categories = [
-      ["---", 0],
-      ["メンズ", 1],
-      ["レディース", 2],
-      ["ベビー・キッズ", 3],
-      ["インテリア・住まい・小物", 4],
-      ["本・音楽・ゲーム", 5],
-      ["おもちゃ・ホビー・グッズ", 6],
-      ["家電・スマホ・カメラ", 7],
-      ["スポーツ・レジャー", 8],
-      ["ハンドメイド", 9],
-      ["その他", 10]
-    ]
-
-    @shipping_fee_options = [
+    @shipping_fee_status = [
       ["---", "未選択"],
       ["着払い(購入者負担)", "着払い"],
       ["送料込み(出品者負担)", "送料込み"]
     ]
 
-    @prefecture_options = [
+    @prefecture = [
       ["---", "---"],
       ["北海道", "北海道"],
       ["青森県", "青森県"],
@@ -78,21 +64,23 @@ class ItemsController < ApplicationController
       ["宮崎県", "宮崎県"],
       ["鹿児島県", "鹿児島県"],
       ["沖縄県", "沖縄県"]
-    ]    
+    ]
   end
 
   def create
-    @item = current_user.items.build(item_params)
+    @item = Item.new(item_params)
+    @item.user = current_user
     
     if @item.save
-      respond_to do |format|
-        format.html { redirect_to root_path, notice: '商品が出品されました。' }
-        format.js  { render js: "window.location.replace('#{root_path}');" }
-      end
+      redirect_to root_path
     else
-      @categories = Category.all
-      @shipping_fee_options = [["---", "未選択"], ["着払い(購入者負担)", "着払い"], ["送料込み(出品者負担)", "送料込み"]]
-      @prefecture_options = [
+      set_categories
+      @shipping_fee_status = [
+        ["---", "未選択"],
+        ["着払い(購入者負担)", "着払い"],
+        ["送料込み(出品者負担)", "送料込み"]
+      ]
+      @prefecture = [
         ["---", "---"],
         ["北海道", "北海道"],
         ["青森県", "青森県"],
@@ -141,22 +129,31 @@ class ItemsController < ApplicationController
         ["宮崎県", "宮崎県"],
         ["鹿児島県", "鹿児島県"],
         ["沖縄県", "沖縄県"]
-      ]
-    respond_to do |format|
-      format.html { render :new }
-      format.js { render :create_error }
-    end
+      ]  
+      render :new
     end
   end
   
   private
-
-  def set_categories
-    @categories = Category.all
-  end  
   
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :status, :shipping_fee_status, :prefecture, :scheduled_delivery, :price)
   end  
+
+  def set_categories
+    @categories = [
+      ["---", 0],
+      ["メンズ", 1],
+      ["レディース", 2],
+      ["ベビー・キッズ", 3],
+      ["インテリア・住まい・小物", 4],
+      ["本・音楽・ゲーム", 5],
+      ["おもちゃ・ホビー・グッズ", 6],
+      ["家電・スマホ・カメラ", 7],
+      ["スポーツ・レジャー", 8],
+      ["ハンドメイド", 9],
+      ["その他", 10]
+    ]
+  end
   
 end
