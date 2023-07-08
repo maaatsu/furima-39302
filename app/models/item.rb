@@ -19,7 +19,4 @@ class Item < ApplicationRecord
       greater_than: 0,
       message: "is invalid. Input half-width characters" }
 
-  private
-
-  enum shipping_fee_status: { 着払い: 0, 送料込み: 1 }
 end
