@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
 
   before_action :authenticate_user!, only: [:new]
-  before_action :set_categories, only: [:new, :create, :edit, :update]
   
   def index
     render 'items/index'
