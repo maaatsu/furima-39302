@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :shipping_fee_status
+  belongs_to :prefecture
 
   validates :image, presence: { message: "can't be blank" }
   validates :name, presence: { message: "can't be blank" }
@@ -11,7 +12,7 @@ class Item < ApplicationRecord
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank" }
   validates :status, presence: { message: "can't be blank" }
   validates :shipping_fee_status_id, numericality: { other_than: 1 , message: "can't be blank" }
-  validates :prefecture, presence: { message: "can't be blank" }
+  validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank" }
   validates :scheduled_delivery, presence: { message: "can't be blank" }
   validates :price, presence: { message: "can't be blank" },
                     numericality: { only_integer: true,
