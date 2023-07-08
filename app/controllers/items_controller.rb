@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    @categories = Category.all
+    @category = Category.all
     @shipping_fee_status = [
       ["---", "未選択"],
       ["着払い(購入者負担)", "着払い"],
@@ -75,7 +75,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      set_categories
+      @categories = Category.all
       @shipping_fee_status = [
         ["---", "未選択"],
         ["着払い(購入者負担)", "着払い"],
@@ -138,7 +138,7 @@ class ItemsController < ApplicationController
   private
   
   def item_params
-    params.require(:item).permit(:image, :name, :description, :categories_id, :status, :shipping_fee_status, :prefecture, :scheduled_delivery, :price)
+    params.require(:item).permit(:image, :name, :description, :category_id, :status, :shipping_fee_status, :prefecture, :scheduled_delivery, :price)
   end  
   
 end

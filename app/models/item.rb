@@ -2,12 +2,12 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :categories
+  belongs_to :category
 
   validates :image, presence: { message: "can't be blank" }
   validates :name, presence: { message: "can't be blank" }
   validates :description, presence: { message: "can't be blank" }
-  validates :categories_id, numericality: { other_than: 1 , message: "can't be blank" }
+  validates :category_id, numericality: { other_than: 1 , message: "can't be blank" }
   validates :status, presence: { message: "can't be blank" }
   validates :shipping_fee_status, presence: { message: "can't be blank" }
   validates :prefecture, presence: { message: "can't be blank" }
