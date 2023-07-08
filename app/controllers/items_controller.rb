@@ -4,10 +4,12 @@ class ItemsController < ApplicationController
   
   def index
     render 'items/index'
+    @items = Item.order("created_at DESC")
   end
 
   def new
     @item = Item.new
+    @categories = Category.all
     @shipping_fee_status = [
       ["---", "未選択"],
       ["着払い(購入者負担)", "着払い"],
@@ -136,23 +138,7 @@ class ItemsController < ApplicationController
   private
   
   def item_params
-    params.require(:item).permit(:image, :name, :description, :category_id, :status, :shipping_fee_status, :prefecture, :scheduled_delivery, :price)
+    params.require(:item).permit(:image, :name, :description, :categories_id, :status, :shipping_fee_status, :prefecture, :scheduled_delivery, :price)
   end  
-
-  def set_categories
-    @categories = [
-      ["---", 0],
-      ["メンズ", 1],
-      ["レディース", 2],
-      ["ベビー・キッズ", 3],
-      ["インテリア・住まい・小物", 4],
-      ["本・音楽・ゲーム", 5],
-      ["おもちゃ・ホビー・グッズ", 6],
-      ["家電・スマホ・カメラ", 7],
-      ["スポーツ・レジャー", 8],
-      ["ハンドメイド", 9],
-      ["その他", 10]
-    ]
-  end
   
 end
