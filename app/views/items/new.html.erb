@@ -53,7 +53,7 @@
           商品の状態
           <span class="indispensable">必須</span>
         </div>
-          <%= f.collection_select(:status, [["---", nil], ["新品・未使用", "new"], ["未使用に近い", "like_new"], ["目立った傷や汚れなし", "good"], ["やや傷や汚れあり", "fair"], ["傷や汚れあり", "poor"], ["全体的に状態が悪い", "bad"]], :last, :first, { }, { class: "select-box", id: "item-sales-status" }) %>
+          <%= f.collection_select(:status_id, @statuses, :id, :name, { }, { class: "select-box", id: "item-status" }) %>
       </div>
     </div>
     <%# /商品の詳細 %>

@@ -12,6 +12,7 @@ class ItemsController < ApplicationController
     @categories = Category.all
     @shipping_fee_statuses = ShippingFeeStatus.all
     @prefectures = Prefecture.all
+    @statuses = Status.all
   end
 
   def create
@@ -24,6 +25,7 @@ class ItemsController < ApplicationController
       @categories = Category.all
       @shipping_fee_statuses = ShippingFeeStatus.all
       @prefectures = Prefecture.all
+      @status = Status.all
 
       render :new
     end
@@ -32,7 +34,7 @@ class ItemsController < ApplicationController
   private
   
   def item_params
-    params.require(:item).permit(:image, :name, :description, :category_id, :status, :shipping_fee_status_id, :prefecture_id, :scheduled_delivery, :price)
+    params.require(:item).permit(:image, :name, :description, :category_id, :status_id, :shipping_fee_status_id, :prefecture_id, :scheduled_delivery, :price)
   end  
   
 end
