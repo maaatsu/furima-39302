@@ -16,14 +16,14 @@ class Item < ApplicationRecord
   validates :shipping_fee_status_id, numericality: { other_than: 1 , message: "can't be blank" }
   validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank" }
   validates :scheduled_delivery_id, numericality: { other_than: 1 , message: "can't be blank" }
-  validates :price, presence: { message: "Price can't be blank" },
-                    numericality: {
+  validates :price, presence: { message: "can't be blank" }
+  validates :price, numericality: {
                       only_integer: true,
                       greater_than_or_equal_to: 300,
-                      less_than_or_equal_to: 9_999_999,
+                      less_than_or_equal_to: 9999999,
                       message: "Price is out of setting range"
-                    },
-                    format: {
+                    }
+  validates :price, numericality: {
                       with: /\A[0-9]+\z/,
                       message: "Price is invalid. Input half-width characters"
                     }
