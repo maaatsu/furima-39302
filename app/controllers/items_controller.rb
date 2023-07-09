@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
       @categories = Category.all
       @shipping_fee_statuses = ShippingFeeStatus.all
       @prefectures = Prefecture.all
-      @status = Status.all
+      @statuses = Status.all
       @scheduled_deliveries = ScheduledDelivery.all
 
       render :new
