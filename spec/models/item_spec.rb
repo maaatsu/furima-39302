@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   describe '商品出品機能' do
-  before do
-    user = FactoryBot.create(:user)
-    @item = FactoryBot.build(:item, user_id: user.id)
-  end
+    before do
+      user = FactoryBot.create(:user)
+      @item = FactoryBot.build(:item, user_id: user.id)
+    end
 
     context '正常な場合' do
       it '正常に出品できること' do
@@ -19,7 +19,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
-      
+
       it '商品名が必須であること' do
         @item.name = ''
         @item.valid?
@@ -69,29 +69,28 @@ RSpec.describe Item, type: :model do
       end
 
       it '価格は、¥300~¥9,999,999の間のみ保存可能であること' do
-        @item.price = 100  # 価格が範囲外の値（¥300未満）
+        @item.price = 100 # 価格が範囲外の値（¥300未満）
         @item.valid?
         expect(@item.errors[:price]).to include('Price is out of setting range')
-    
-        @item.price = 10_000_000  # 価格が範囲外の値（¥9,999,999超過）
+
+        @item.price = 10_000_000 # 価格が範囲外の値（¥9,999,999超過）
         @item.valid?
         expect(@item.errors[:price]).to include('Price is out of setting range')
       end
 
       it '価格は半角数値のみ保存可能であること' do
-          @item.price = '１０００'  # 全角数字
-          @item.valid?
-          expect(@item.errors[:price]).to include('Price is invalid. Input half-width characters')
+        @item.price = '１０００' # 全角数字
+        @item.valid?
+        expect(@item.errors[:price]).to include('Price is invalid. Input half-width characters')
 
-          @item.price = 'abc'  # 文字列
-          @item.valid?
-          expect(@item.errors[:price]).to include('Price is invalid. Input half-width characters')
+        @item.price = 'abc' # 文字列
+        @item.valid?
+        expect(@item.errors[:price]).to include('Price is invalid. Input half-width characters')
 
-          @item.price = '1000'  # 半角数字
-          @item.valid?
-          expect(@item.errors[:price]).to be_empty
-        end
-
+        @item.price = '1000' # 半角数字
+        @item.valid?
+        expect(@item.errors[:price]).to be_empty
+      end
     end
   end
 end
