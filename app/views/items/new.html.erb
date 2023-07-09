@@ -81,7 +81,7 @@
           発送までの日数
           <span class="indispensable">必須</span>
         </div>
-          <%= f.collection_select(:scheduled_delivery, [["---", ""], ["1~2日で発送", "1~2日で発送"], ["2~3日で発送", "2~3日で発送"], ["4~7日で発送", "4~7日で発送"]], :last, :first, { }, { class: "select-box", id: "item-scheduled-delivery" }) %>
+          <%= f.collection_select(:scheduled_delivery_id, @scheduled_deliveries, :id, :name, { }, { class: "select-box", id: "item-scheduled-delivery" }) %>
       </div>
     </div>
     <%# /配送について %>
