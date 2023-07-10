@@ -15,21 +15,21 @@
 
 ### Association
 
-* has_many :goods
+* has_many :items
 * has_many :purchase_records
 
-## goods テーブル
+## items テーブル
 
 | Column              | Type       | Options                        |
 | ------------------- | ---------- | ------------------------------ |
+| image               | string     | null: false                    |
 | name                | string     | null: false                    |
 | description         | text       | null: false                    |
-| user                | references | null: false, foreign_key: true |
 | category_id         | integer    | null: false                    |
-| situation_id        | integer    | null: false                    |
-| shipping_charge _id | integer    | null: false                    |
-| region_of_origin_id | integer    | null: false                    |
-| ship_date_id        | integer    | null: false                    |
+| status              | integer    | null: false                    |
+| shipping_fee_status | integer    | null: false                    |
+| prefecture          | integer    | null: false                    |
+| scheduled_delivery  | integer    | null: false                    |
 | price               | integer    | null: false                    |
 
 ### Association
@@ -63,5 +63,5 @@
 ### Association
 
 * belongs_to :user
-* belongs_to :good
+* belongs_to :item
 * has_one :shipping_address

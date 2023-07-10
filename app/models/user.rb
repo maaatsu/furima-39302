@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   validate :password_complexity
 
+  has_many :items, dependent: :destroy
+
   private
 
   def password_complexity
