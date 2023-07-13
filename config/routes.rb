@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/mypage', to: 'users#mypage', as: 'mypage'
   get '/items/new', to: 'items#new', as: 'new_item'
+  get '/items', to: 'items#index'
   resources :items, only: [:index, :new, :create]
 
   devise_scope :user do
