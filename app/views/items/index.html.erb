@@ -148,7 +148,7 @@
                 <%= item.name %>
               </h3>
               <div class='item-price'>
-                <span><%= number_to_currency(item.price, unit: '円') %></span>
+                  <span><%= number_to_currency(item.price.floor / 100, unit: '', separator: '', delimiter: '', format: '%n').to_i %>円</span>
                 <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
                   <span class='star-count'>0</span>
