@@ -148,11 +148,16 @@
                 <%= item.name %>
               </h3>
               <div class='item-price'>
-                  <span><%= number_to_currency(item.price.floor / 100, unit: '', separator: '', delimiter: '', format: '%n').to_i %>円</span>
+                <span><%= number_to_currency(item.price.floor / 100, unit: '', separator: '', delimiter: '', format: '%n').to_i %>円</span>
                 <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
                   <span class='star-count'>0</span>
                 </div>
+              </div>
+              <div class='shipping-fee'>
+                <% if item.shipping_fee_status.present? %>
+                  <%= item.shipping_fee_status.name %>
+                <% end %>
               </div>
             </div>
           <% end %>
@@ -175,6 +180,9 @@
                   <%= image_tag "star.png", class:"star-icon" %>
                   <span class='star-count'>0</span>
                 </div>
+              </div>
+              <div class='shipping-fee'>
+                送料負担：未設定
               </div>
             </div>
           <% end %>
