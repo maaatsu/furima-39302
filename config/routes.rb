@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/mypage', to: 'users#mypage', as: 'mypage'
   get '/items/new', to: 'items#new', as: 'new_item'
   get '/items', to: 'items#index'
-  resources :items, only: [:index, :new, :create]
+  resources :items, only: [:index, :new, :create, :show, :edit]
 
   devise_scope :user do
     authenticated :user do

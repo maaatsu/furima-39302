@@ -130,7 +130,7 @@
 <% @items.order(created_at: :desc).each do |item| %>
 
         <li class='list'>
-          <%# <%= link_to items_path(item) do %>
+          <%= link_to item_path(item) do %>
             <div class='item-img-content'>
               <%= image_tag url_for(item.image.variant(resize: "300x300").processed), class: "item-img" %>
 
@@ -139,7 +139,7 @@
                 <div class='sold-out'>
                   <span>Sold Out!!</span>
                 </div>
-          <%# <% end %>
+          <% end %>
               <%# //商品が売れていればsold outを表示しましょう %>
             </div>
             <div class='item-info'>
