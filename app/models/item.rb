@@ -27,4 +27,8 @@ class Item < ApplicationRecord
     less_than_or_equal_to: 9_999_999,
     message: 'Price is out of setting range'
   }
+
+  def sold_out?
+  end
+
 end
