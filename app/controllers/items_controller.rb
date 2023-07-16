@@ -67,8 +67,8 @@ end
   end
 
   def check_ownership
-    unless @item.user == current_user
-      redirect_to root_path
+    unless @item.user == current_user && !@item.sold_out?
+    redirect_to root_path
     end
   end
 end
