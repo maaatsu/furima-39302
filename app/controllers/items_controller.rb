@@ -51,6 +51,12 @@ end
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
+      @categories = Category.all
+      @shipping_fee_statuses = ShippingFeeStatus.all
+      @prefectures = Prefecture.all
+      @statuses = Status.all
+      @scheduled_deliveries = ScheduledDelivery.all
+
       render :edit
     end
   end
