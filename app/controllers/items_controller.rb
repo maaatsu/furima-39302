@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :check_ownership, only: [:edit, :update, :destroy]
+  before_action :set_variables, only: [:new, :create, :edit, :update]
 
   def index
     @items = Item.order('created_at DESC')
@@ -10,11 +11,6 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    @categories = Category.all
-    @shipping_fee_statuses = ShippingFeeStatus.all
-    @prefectures = Prefecture.all
-    @statuses = Status.all
-    @scheduled_deliveries = ScheduledDelivery.all
   end
 
   def create
@@ -24,39 +20,20 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      @categories = Category.all
-      @shipping_fee_statuses = ShippingFeeStatus.all
-      @prefectures = Prefecture.all
-      @statuses = Status.all
-      @scheduled_deliveries = ScheduledDelivery.all
-
       render :new
     end
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
-    @categories = Category.all
-    @shipping_fee_statuses = ShippingFeeStatus.all
-    @prefectures = Prefecture.all
-    @statuses = Status.all
-    @scheduled_deliveries = ScheduledDelivery.all
   end
 
   def update
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
-      @categories = Category.all
-      @shipping_fee_statuses = ShippingFeeStatus.all
-      @prefectures = Prefecture.all
-      @statuses = Status.all
-      @scheduled_deliveries = ScheduledDelivery.all
-
       render :edit
     end
   end
@@ -70,6 +47,14 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def set_variables
+    @categories = Category.all
+    @shipping_fee_statuses = ShippingFeeStatus.all
+    @prefectures = Prefecture.all
+    @statuses = Status.all
+    @scheduled_deliveries = ScheduledDelivery.all
   end
 
   def check_ownership
