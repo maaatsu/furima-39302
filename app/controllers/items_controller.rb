@@ -45,7 +45,7 @@ class ItemsController < ApplicationController
     @prefectures = Prefecture.all
     @statuses = Status.all
     @scheduled_deliveries = ScheduledDelivery.all
-end
+  end
 
   def update
     if @item.update(item_params)
@@ -73,8 +73,8 @@ end
   end
 
   def check_ownership
-    unless @item.user == current_user && !@item.sold_out?
+    return if @item.user == current_user && !@item.sold_out?
+
     redirect_to root_path
-    end
   end
 end
