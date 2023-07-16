@@ -38,7 +38,12 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-  end
+    @categories = Category.all
+    @shipping_fee_statuses = ShippingFeeStatus.all
+    @prefectures = Prefecture.all
+    @statuses = Status.all
+    @scheduled_deliveries = ScheduledDelivery.all
+end
 
   private
 
