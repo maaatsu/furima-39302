@@ -14,7 +14,7 @@
         </h2>
         <div class='buy-item-price'>
           <p class='item-price-text'>¥<%= number_to_currency(@item.price.floor / 100, unit: '', separator: '', delimiter: '', format: '%n').to_i %></p>
-          <p class='item-price-sub-text'><%= '配送料負担' %></p>
+          <p class='item-price-sub-text'><%= @item.shipping_fee_status.name %></p>
         </div>
       </div>
     </div>
