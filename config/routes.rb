@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/items/new', to: 'items#new', as: 'new_item'
   get '/items', to: 'items#index'
   resources :items, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  resources :orders, only: [:index, :new]
 
   devise_scope :user do
     authenticated :user do
