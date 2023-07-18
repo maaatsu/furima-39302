@@ -16,7 +16,7 @@
 ### Association
 
 * has_many :items
-* has_many :purchase_records
+* has_many :orders
 
 ## items テーブル
 
@@ -53,7 +53,7 @@
 
 * belongs_to :purchase_record
 
-## purchase_records テーブル
+## orders テーブル
 
 | Column   | Type       | Options                        |
 | -------- | ---------- | ------------------------------ |
