@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :status
   belongs_to :scheduled_delivery
+  has_many :orders
 
   validates :image, presence: { message: "can't be blank" }
   validates :name, presence: { message: "can't be blank" }
