@@ -1,6 +1,6 @@
 class PurchaseForm
   include ActiveModel::Model
-  attr_accessor :shipping_address, :billing_address, :credit_card_number, :expiry_date, :security_code
+  attr_accessor :item_id, :shipping_address, :billing_address, :credit_card_number, :expiry_date, :security_code, :user_id
 
   validates :shipping_address, presence: true
   validates :billing_address, presence: true
