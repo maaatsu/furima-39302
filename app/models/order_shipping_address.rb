@@ -12,4 +12,9 @@ class OrderShippingAddress
   
   end
 
+  def save
+    order = Order.create(token: token)
+    ShippingAddress.create(postal_code: postal_code, prefecture_id: prefecture.id, city: city, address: address, building_name: building_name, telephone_number: telephone_number, order_id: order.id)
+  end
+
 end
