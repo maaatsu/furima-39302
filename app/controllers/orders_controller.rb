@@ -6,15 +6,23 @@ class OrdersController < ApplicationController
     @order_shipping_address = OrderShippingAddress.new
   end
 
+  def new
+    @order_shipping_address = OrderShippingAddress.new
+  end
+
   def create
-    @order = Order.create(order_params)
-    ShippingAddress.create(shipping_address_params)
-    redirect_to root_path
+    @order_shipping_address = OrderShippingAddress.new(order_params)
+    if @order_shipping_address.valid?
+      @order_shipping_address.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   private
 
-  def shipping_address_params
-    params.permit(:postal_code, :prefecture_id, :city, :address, :building_name, :telephone_number, :order).merge(order_id: @order.id)
+  def order_shipping_address_params
+    params.require(:order_shipping_address).permit(:postal_code, :prefecture_id, :city, :address, :building_name, :telephone_number, :order).merge(order_id: order.id)
   end
 end
