@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :check_login_status, only: :index
-
+  before_action :check_item_status, only: :index
+  
   def index
     @item = Item.find(params[:item_id])
 
@@ -46,10 +46,11 @@ class OrdersController < ApplicationController
     )
   end
 
-  def check_login_status
-    unless user_signed_in?
-      redirect_to new_user_session_path
+  def check_item_status
+    if user_signed_in?
+      @item = Item.find(params[:item_id])
+      redirect_to root_path if current_user == @item.user || @item.sold?
     end
   end
-
+  
 end
