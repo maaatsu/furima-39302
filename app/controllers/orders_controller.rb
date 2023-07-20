@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
+  before_action :check_login_status, only: :index
 
   def index
     @item = Item.find(params[:item_id])
@@ -43,6 +44,12 @@ class OrdersController < ApplicationController
       card: order_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def check_login_status
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
 
 end
