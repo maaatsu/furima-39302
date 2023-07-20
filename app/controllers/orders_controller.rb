@@ -3,8 +3,14 @@ class OrdersController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
-    @order_shipping_address = OrderShippingAddress.new
-    @prefectures = Prefecture.all
+
+    if current_user == @item.user
+      redirect_to root_path
+    else
+      @order_shipping_address = OrderShippingAddress.new
+      @prefectures = Prefecture.all
+    end
+
   end
 
   def new
