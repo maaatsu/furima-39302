@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
     @order_shipping_address = OrderShippingAddress.new
+    @prefectures = Prefecture.all
   end
 
   def new
@@ -13,6 +14,7 @@ class OrdersController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     @order_shipping_address = OrderShippingAddress.new(order_params)
+    @prefectures = Prefecture.all
     if @order_shipping_address.valid?
       pay_item
       @order_shipping_address.save
