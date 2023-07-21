@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe OrderShippingAddress, type: :model do
-
   describe '寄付情報の保存' do
     before do
       user = FactoryBot.create(:user)
@@ -15,7 +14,6 @@ RSpec.describe OrderShippingAddress, type: :model do
     end
 
     context '内容に問題がある場合' do
-
       it 'クレジットカード情報が必須であること' do
         @order_shipping_address.token = nil
         expect(@order_shipping_address).not_to be_valid
@@ -68,9 +66,6 @@ RSpec.describe OrderShippingAddress, type: :model do
         expect(@order_shipping_address).not_to be_valid
         expect(@order_shipping_address.errors[:telephone_number]).to include('is invalid. Input only number')
       end
-
     end
-
   end
-
 end
