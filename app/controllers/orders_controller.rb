@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :check_item_status, only: :index
+  before_action :item_set, only: :index, :new, :create
+
 
   def index
-    @item = Item.find(params[:item_id])
 
     if current_user == @item.user || @item.sold?
       redirect_to root_path
@@ -14,7 +15,6 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @item = Item.find(params[:item_id])
     if current_user == @item.user || @item.sold?
       redirect_to root_path
     else
@@ -24,7 +24,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_shipping_address = OrderShippingAddress.new(order_shipping_address_params)
     @order_shipping_address.item_id = @item.id
     @order_shipping_address.user_id = current_user.id
@@ -55,6 +54,10 @@ class OrdersController < ApplicationController
       card: order_shipping_address_params[:token], # カードトークン
       currency: 'jpy' # 通貨の種類（日本円）
     )
+  end
+
+  def item_set
+    @item = Item.find(params[:item_id])
   end
 
   def check_item_status
