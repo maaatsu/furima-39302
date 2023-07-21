@@ -15,8 +15,15 @@ class OrdersController < ApplicationController
   end
 
   def new
+    @item = Item.find(params[:item_id])
+    if current_user == @item.user || @item.sold?
+      redirect_to root_path
+    else
+      @order = Order.new
+    end
   end
-
+  
+  
   def create
     @item = Item.find(params[:item_id])
     @order_shipping_address = OrderShippingAddress.new(order_shipping_address_params)
