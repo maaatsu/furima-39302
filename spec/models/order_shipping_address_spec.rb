@@ -33,7 +33,7 @@ RSpec.describe OrderShippingAddress, type: :model do
       end
 
       it '都道府県が必須であること' do
-        @order_shipping_address.prefecture_id = nil
+        @order_shipping_address.prefecture_id = 1
         expect(@order_shipping_address).not_to be_valid
         expect(@order_shipping_address.errors[:prefecture_id]).to include("can't be blank")
       end
