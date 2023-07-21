@@ -30,5 +30,6 @@ class Item < ApplicationRecord
   }
 
   def sold_out?
+    sold
   end
 end
