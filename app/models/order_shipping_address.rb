@@ -9,7 +9,7 @@ class OrderShippingAddress
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :city
     validates :address
-    validates :telephone_number, length: { minimum: 10, message: 'is too short' },
+    validates :telephone_number, length: { in: 10..11, message: 'is too short' },
                                  format: { with: /\A\d+\z/, message: 'is invalid. Input only number' }
   end
 
