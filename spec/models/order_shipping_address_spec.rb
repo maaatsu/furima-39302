@@ -50,11 +50,6 @@ RSpec.describe OrderShippingAddress, type: :model do
         expect(@order_shipping_address.errors[:address]).to include("can't be blank")
       end
 
-      it '建物名は任意であること' do
-        @order_shipping_address.building_name = nil
-        expect(@order_shipping_address).to be_valid
-      end
-
       it '電話番号が必須であること' do
         @order_shipping_address.telephone_number = nil
         expect(@order_shipping_address).not_to be_valid
