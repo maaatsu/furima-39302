@@ -14,15 +14,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def new
-    if current_user == @item.user || @item.sold?
-      redirect_to root_path
-    else
-      @order_shipping_address = OrderShippingAddress.new
-      @prefectures = Prefecture.all
-    end
-  end
-
   def create
     @order_shipping_address = OrderShippingAddress.new(order_shipping_address_params)
     @order_shipping_address.item_id = @item.id
