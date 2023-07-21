@@ -19,7 +19,8 @@ class OrdersController < ApplicationController
     if current_user == @item.user || @item.sold?
       redirect_to root_path
     else
-      @order = Order.new
+      @order_shipping_address = OrderShippingAddress.new
+      @prefectures = Prefecture.all
     end
   end
   
@@ -35,6 +36,7 @@ class OrdersController < ApplicationController
     if @order_shipping_address.valid?
       pay_item
       @order_shipping_address.save
+      @item.update(sold: true)
       redirect_to root_path
     else
       render 'index'
