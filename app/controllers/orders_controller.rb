@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :check_item_status, only: :index
-  before_action :item_set, only: :index, :new, :create
-
+  before_action :item_set, only: [:index, :new, :create]
+  
 
   def index
 
