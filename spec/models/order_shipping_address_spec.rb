@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-      user = FactoryBot.build(:user)
-      user.save
-      item = FactoryBot.build(:item)
-      item.save
+user = FactoryBot.build(:user)
+user.save
+item = FactoryBot.build(:item)
+item.save
 
 RSpec.describe OrderShippingAddress, type: :model do
   describe '寄付情報の保存' do
@@ -85,13 +85,13 @@ RSpec.describe OrderShippingAddress, type: :model do
       end
 
       it 'userが紐付いていなければ購入できない' do
-        @order_shipping_address.user_id = nil 
+        @order_shipping_address.user_id = nil
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors[:user_id]).to include("can't be blank")
       end
 
       it 'itemが紐付いていなければ購入できない' do
-        @order_shipping_address.item_id = nil 
+        @order_shipping_address.item_id = nil
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors[:item_id]).to include("can't be blank")
       end
