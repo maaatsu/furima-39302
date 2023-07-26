@@ -64,6 +64,7 @@ class ItemsController < ApplicationController
 
   def check_ownership
     return if @item.user == current_user && !@item.sold_out?
+
     redirect_to root_path
   end
 end
