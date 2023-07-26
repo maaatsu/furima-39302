@@ -14,8 +14,6 @@ class OrdersController < ApplicationController
 
   def create
     @order_shipping_address = OrderShippingAddress.new(order_shipping_address_params)
-    @order_shipping_address.item_id = @item.id
-    @order_shipping_address.user_id = current_user.id
 
     @prefectures = Prefecture.all
 
