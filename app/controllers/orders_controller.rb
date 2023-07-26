@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :item_set, only: [:index, :new, :create]
 
   def index
-    if current_user == @item.user || @item.sold?
+    if current_user == @item.user 
       redirect_to root_path
     else
       @order_shipping_address = OrderShippingAddress.new
@@ -51,6 +51,6 @@ class OrdersController < ApplicationController
     return unless user_signed_in?
 
     @item = Item.find(params[:item_id])
-    redirect_to root_path if current_user == @item.user || @item.sold?
+    redirect_to root_path if current_user == @item.user 
   end
 end
