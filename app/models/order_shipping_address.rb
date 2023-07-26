@@ -13,5 +13,13 @@ class OrderShippingAddress
   end
 
   def save
+    @order = Order.new(user_id: user_id, item_id: item_id)
+
+    if @order.save
+      ShippingAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, address: address,
+                             building_name: building_name, telephone_number: telephone_number, order_id: @order.id)
+    else
+      puts @order.errors.full_messages
+    end
   end
 end
