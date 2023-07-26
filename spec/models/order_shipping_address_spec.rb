@@ -86,13 +86,13 @@ RSpec.describe OrderShippingAddress, type: :model do
       end
 
       it 'userが紐付いていなければ購入できない' do
-        @order_shipping_address.user_id = nil
+        @order_shipping_address.user_id = ''
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors[:user_id]).to include("can't be blank")
       end
 
       it 'itemが紐付いていなければ購入できない' do
-        @order_shipping_address.item_id = nil
+        @order_shipping_address.item_id = ''
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors[:item_id]).to include("can't be blank")
       end
