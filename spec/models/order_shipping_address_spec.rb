@@ -37,8 +37,8 @@ RSpec.describe OrderShippingAddress, type: :model do
         expect(@order_shipping_address.errors[:postal_code]).to include('is invalid. Enter it as follows (e.g. 123-4567)')
       end
 
-      it '都道府県が必須であること' do
-        @order_shipping_address.prefecture_id = nil
+      it '都道府県が---では登録できないこと' do
+        @order_shipping_address.prefecture_id = '1'
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors[:prefecture_id]).to include("can't be blank")
       end
