@@ -12,6 +12,10 @@ RSpec.describe OrderShippingAddress, type: :model do
       it '正常に保存されること' do
         expect(@order_shipping_address).to be_valid
       end
+      it '建物名は空でも購入できること' do
+        @order_shipping_address.building_name = nil
+        expect(@order_shipping_address).to be_valid
+      end
     end
 
     context '内容に問題がある場合' do
