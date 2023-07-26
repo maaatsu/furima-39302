@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :check_item_status, only: :index
-  before_action :item_set, only: [:index, :new, :create]
+  before_action :item_set, only: [:new, :create]
 
   def index
     if current_user == @item.user 
@@ -14,19 +14,22 @@ class OrdersController < ApplicationController
 
   def create
     @order_shipping_address = OrderShippingAddress.new(order_shipping_address_params)
-
+    @order_shipping_address.user_id = current_user.id
+    @order_shipping_address.item_id = params[:item_id]
     @prefectures = Prefecture.all
 
     if @order_shipping_address.valid?
+      @order = current_user.orders.build(item: @item) 
+      @order.save 
+
+      @order_shipping_address.save 
       pay_item
-      @order_shipping_address.save
-      @item.update(sold: true)
       redirect_to root_path
     else
       render 'index'
     end
   end
-
+  
   private
 
   def order_shipping_address_params

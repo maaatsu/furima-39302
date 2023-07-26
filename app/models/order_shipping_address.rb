@@ -11,18 +11,9 @@ class OrderShippingAddress
     validates :telephone_number, length: { in: 10..11, message: 'is too short' },
                                  format: { with: /\A\d{10,11}\z/, message: 'is invalid. Input only number (10-11 digits)' }
                                  
-    validates :user_id
-    validates :item_id
   end
 
   def save
-    @order = Order.new(user_id: user_id, item_id: item_id)
 
-    if @order.save
-      ShippingAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, address: address,
-                             building_name: building_name, telephone_number: telephone_number, order_id: @order.id)
-    else
-      puts @order.errors.full_messages
-    end
   end
 end
