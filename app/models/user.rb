@@ -11,10 +11,10 @@ class User < ApplicationRecord
   validates :last_name_kana, presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: 'は全角カタカナで入力してください' }
   validates :first_name_kana, presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: 'は全角カタカナで入力してください' }
   validates :date_of_birth, presence: { message: 'を入力してください' }
-
   validate :password_complexity
 
   has_many :items, dependent: :destroy
+  has_many :orders
 
   private
 

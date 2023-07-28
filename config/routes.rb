@@ -18,4 +18,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :items do
+    resources :orders, only: [:index, :create]
+  end
+
 end

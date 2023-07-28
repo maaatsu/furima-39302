@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :status
   belongs_to :scheduled_delivery
+  has_one    :order
 
   validates :image, presence: { message: "can't be blank" }
   validates :name, presence: { message: "can't be blank" }
@@ -29,5 +30,6 @@ class Item < ApplicationRecord
   }
 
   def sold_out?
+    order.present?
   end
 end
