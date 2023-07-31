@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :destroy]
+  before_action :authenticate_user!, except: [:index, :show, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :check_ownership, only: [:edit, :update, :destroy]
   before_action :set_variables, only: [:new, :create, :edit, :update]
@@ -65,6 +65,6 @@ class ItemsController < ApplicationController
   def check_ownership
     return if @item.user == current_user && !@item.sold_out?
 
-    redirect_to root_path
+    redirect_to new_user_session_path
   end
 end

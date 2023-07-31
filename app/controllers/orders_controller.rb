@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
   before_action :check_item_status, only: :index
-  before_action :item_set, only: [:new, :create]
-
+  before_action :check_login_status, only: :new
+  
   def index
+    @item = Item.find_by(id: params[:item_id])
     if current_user == @item.user
       redirect_to root_path
     else
@@ -18,6 +19,8 @@ class OrdersController < ApplicationController
     @order_shipping_address.item_id = params[:item_id]
     @prefectures = Prefecture.all
 
+    @item = Item.find(params[:item_id]) 
+
     if @order_shipping_address.valid?
       @order = current_user.orders.build(item: @item)
       @order.save
@@ -28,6 +31,12 @@ class OrdersController < ApplicationController
     else
       render 'index'
     end
+  end
+
+  def new
+    @item = Item.find_by(id: params[:item_id])
+    @order_shipping_address = OrderShippingAddress.new
+    @prefectures = Prefecture.all
   end
 
   private
@@ -46,14 +55,17 @@ class OrdersController < ApplicationController
     )
   end
 
-  def item_set
-    @item = Item.find(params[:item_id])
-  end
-
   def check_item_status
     return unless user_signed_in?
 
-    @item = Item.find(params[:item_id])
+    @item = Item.find_by(id: params[:item_id]) 
     redirect_to root_path if current_user == @item.user
   end
+
+  def check_login_status
+    return if user_signed_in?
+    
+    redirect_to new_user_session_path
+  end
+
 end
