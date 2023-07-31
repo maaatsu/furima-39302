@@ -11,7 +11,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.integer    :scheduled_delivery_id,  null: false
       t.integer    :price,                  null: false
 
-      t.timestamps null: false
+      t.timestamps
     end
   end
 end
