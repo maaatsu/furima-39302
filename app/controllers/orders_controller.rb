@@ -59,7 +59,7 @@ class OrdersController < ApplicationController
     return unless user_signed_in?
 
     @item = Item.find_by(id: params[:item_id]) 
-    redirect_to root_path if current_user == @item.user
+    redirect_to root_path if current_user == @item.user || @item.sold_out?
   end
 
   def check_login_status
