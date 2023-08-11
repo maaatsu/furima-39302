@@ -73,12 +73,8 @@ gem 'image_processing', '~> 1.2'
 
 gem 'pry-rails'
 
-<<<<<<< Updated upstream
-gem 'payjp'
-=======
 gem 'payjp'
 
 gem 'mimemagic'
 
 gem "aws-sdk-s3", require: false
->>>>>>> Stashed changes
