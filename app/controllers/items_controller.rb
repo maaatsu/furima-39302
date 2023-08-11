@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   before_action :set_variables, only: [:new, :create, :edit, :update]
 
   def index
-    @items = Item.order('created_at DESC')
+    @items = Item.with_attached_image.order('created_at DESC')
     render 'items/index'
   end
 
